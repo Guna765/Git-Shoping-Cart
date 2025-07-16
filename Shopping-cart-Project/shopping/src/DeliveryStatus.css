@@ -1,0 +1,143 @@
+.delivery-status-container {
+    padding: 20px;
+    max-width: 1200px; /* Increased max-width to accommodate grid */
+    margin: 20px auto;
+    background-color: #f9f9f9;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    text-align: center;
+    font-family: 'Arial', sans-serif;
+}
+
+.delivery-status-container h2 {
+    color: #333;
+    margin-bottom: 25px;
+    font-size: 2em;
+    font-weight: bold;
+    border-bottom: 2px solid #eee;
+    padding-bottom: 10px;
+    
+}
+
+/* New CSS for Grid Layout (Multi-column) */
+.delivery-items-row {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); /* Adjust minmax as needed */
+    gap: 25px; /* Spacing between cards */
+    padding: 20px 0;
+   /* Center items if they don't fill the row */
+    
+   
+}
+
+
+.delivery-card {
+    background-color: #fff;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    padding: 20px;
+    text-align: left;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.08);
+    transition: transform 0.2s ease-in-out;
+    display: flex; /* Make card content a flex container */
+    flex-direction: column; /* Stack content vertically inside card */
+    align-items: flex-start; /* Align text to start */
+}
+
+.delivery-card:hover {
+    transform: translateY(-3px);
+}
+
+.delivery-card h3 {
+    color: #0056b3;
+    margin-bottom: 10px;
+    font-size: 1.3em;
+    border-bottom: 1px dashed #eee;
+    padding-bottom: 8px;
+    width: 100%; /* Ensure heading takes full width */
+}
+
+.delivery-card p {
+    margin-bottom: 8px;
+    color: #555;
+    line-height: 1.5;
+}
+
+.delivery-card strong {
+    color: #333;
+    font-weight: 600;
+}
+
+.delivery-item-image {
+    max-width: 120px;
+    height: auto;
+    border-radius: 4px;
+    margin: 15px auto 0 auto; /* Center image horizontally within the card */
+    border: 1px solid #eee;
+    display: block;
+}
+
+/* Status specific styling */
+.status-processing {
+    color: orange;
+    font-weight: bold;
+}
+
+.status-shipped {
+    color: blue;
+    font-weight: bold;
+}
+
+.status-out-for-delivery {
+    color: purple;
+    font-weight: bold;
+}
+
+.status-delivered {
+    color: green;
+    font-weight: bold;
+}
+
+/* Buttons */
+.delivery-card button {
+    background-color: #0e79b8;
+    color: white;
+    padding: 8px 15px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 0.95em;
+    margin-top: 15px;
+    transition: background-color 0.3s ease;
+    align-self: center; /* Center button within the flex column card */
+}
+
+.delivery-card button:hover {
+    background-color: #1480b3;
+}
+
+.back-button {
+    background-color: #007bff;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 1em;
+    margin-top: 30px;
+    transition: background-color 0.3s ease;
+}
+
+.back-button:hover {
+    background-color: #0056b3;
+}
+
+/* Message when no deliveries are found */
+.no-deliveries-message {
+    color: #666;
+    font-size: 1.1em;
+    padding: 20px;
+    background-color: #e9ecef;
+    border-radius: 5px;
+    margin-top: 20px;
+}

@@ -1,0 +1,104 @@
+/* src/components/AddressForm.css */
+
+.address-form-container {
+    max-width: 500px;
+    margin: 40px auto;
+    padding: 30px;
+    border: 1px solid #ddd;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    background-color: #fff;
+    font-family: 'Arial', sans-serif;
+    color: #333;
+}
+
+.address-form-container h2 {
+    text-align: center;
+    color: #0056b3;
+    margin-bottom: 25px;
+    font-size: 2em;
+    font-weight: 600;
+}
+
+.form-group {
+    margin-bottom: 20px;
+}
+
+.form-group label {
+    display: block;
+    margin-bottom: 8px;
+    font-weight: bold;
+    color: #555;
+    font-size: 1em;
+}
+
+.form-group input[type="text"] {
+    width: calc(100% - 20px); /* Adjust for padding */
+    padding: 12px 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 1em;
+    box-sizing: border-box; /* Include padding in width */
+    transition: border-color 0.3s ease;
+}
+
+.form-group input[type="text"]:focus {
+    border-color: #007bff;
+    outline: none;
+    box-shadow: 0 0 5px rgba(0, 123, 255, 0.25);
+}
+
+.form-group input[type="text"]:disabled {
+    background-color: #e9ecef;
+    cursor: not-allowed;
+}
+
+.submit-address-button,
+.back-button {
+    display: block;
+    width: 100%;
+    padding: 12px 20px;
+    font-size: 1.1em;
+    font-weight: bold;
+    color: #fff;
+    background-color: #28a745; /* Green for submit */
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+    margin-top: 25px;
+    box-sizing: border-box;
+}
+
+.submit-address-button:hover {
+    background-color: #218838;
+    transform: translateY(-2px);
+}
+
+.submit-address-button:disabled {
+    background-color: #95d491;
+    cursor: not-allowed;
+}
+
+.back-button {
+    background-color: #6c757d; /* Grey for back button */
+    margin-top: 15px;
+}
+
+.back-button:hover {
+    background-color: #5a6268;
+    transform: translateY(-2px);
+}
+
+.back-button:disabled {
+    background-color: #aeb4b9;
+    cursor: not-allowed;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+    .address-form-container {
+        margin: 20px;
+        padding: 20px;
+    }
+}

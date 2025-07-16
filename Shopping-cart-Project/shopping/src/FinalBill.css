@@ -1,0 +1,187 @@
+.final-bill-container {
+    max-width: 700px;
+    margin: 30px auto;
+    padding: 30px;
+    background-color: #ffffff;
+    border-radius: 10px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+    font-family: 'Arial', sans-serif;
+    text-align: center;
+}
+
+.final-bill-container h2 {
+    color: #333;
+    margin-bottom: 25px;
+    font-size: 2.2em;
+    font-weight: bold;
+    border-bottom: 2px solid #eee;
+    padding-bottom: 10px;
+}
+
+.bill-content {
+    border: 1px solid #e0e0e0;
+    padding: 20px;
+    margin-bottom: 30px;
+    background-color: #fdfdfd;
+    text-align: left;
+    line-height: 1.6;
+}
+
+.bill-header {
+    text-align: center;
+    margin-bottom: 30px;
+    border-bottom: 1px solid #eee;
+    padding-bottom: 15px;
+}
+
+.bill-header h1 {
+    font-size: 2.5em;
+    color: #007bff;
+    margin-bottom: 10px;
+}
+
+.bill-header p {
+    font-size: 1.1em;
+    color: #555;
+}
+
+.bill-section {
+    margin-bottom: 25px;
+    padding-bottom: 15px;
+    border-bottom: 1px dashed #e9ecef;
+}
+
+.bill-section:last-of-type {
+    border-bottom: none;
+    margin-bottom: 0;
+    padding-bottom: 0;
+}
+
+.bill-section h3 {
+    font-size: 1.5em;
+    color: #444;
+    margin-bottom: 15px;
+    border-left: 5px solid #007bff;
+    padding-left: 10px;
+}
+
+.bill-section p {
+    font-size: 1em;
+    color: #666;
+    margin-left: 15px;
+}
+
+.bill-section strong {
+    color: #333;
+}
+
+.bill-item-image {
+    max-width: 100px;
+    height: auto;
+    border-radius: 5px;
+    margin: 10px 0;
+    border: 1px solid #ddd;
+}
+
+.total-summary {
+    text-align: right;
+    font-size: 1.1em;
+    font-weight: bold;
+}
+
+.total-summary p {
+    margin-bottom: 10px;
+}
+
+.total-summary .grand-total {
+    font-size: 1.4em;
+    color: #28a745;
+    margin-top: 20px;
+    border-top: 2px solid #eee;
+    padding-top: 15px;
+}
+
+.bill-barcode {
+    margin-top: 30px;
+    margin-bottom: 30px;
+    text-align: center;
+}
+
+/* react-barcode specific styling adjustments */
+.bill-barcode svg {
+    max-width: 100%; /* Ensure barcode fits within its container */
+    height: auto;
+}
+
+.bill-footer {
+    text-align: center;
+    margin-top: 30px;
+    font-size: 1.1em;
+    color: #777;
+}
+
+.bill-actions {
+    margin-top: 30px;
+    display: flex;
+    justify-content: center;
+    gap: 15px;
+}
+
+.print-bill-button,
+.back-button {
+    padding: 12px 25px;
+    border: none;
+    border-radius: 5px;
+    font-size: 1.05em;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+.print-bill-button {
+    background-color: #007bff;
+    color: white;
+}
+
+.print-bill-button:hover {
+    background-color: #0056b3;
+    transform: translateY(-2px);
+}
+
+.back-button {
+    background-color: #6c757d;
+    color: white;
+}
+
+.back-button:hover {
+    background-color: #5a6268;
+    transform: translateY(-2px);
+}
+
+/* Print specific styles (Optional: for better print layout) */
+@media print {
+    body * {
+        visibility: hidden;
+    }
+    .final-bill-container, .final-bill-container * {
+        visibility: visible;
+    }
+    .final-bill-container {
+        position: absolute;
+        left: 0;
+        top: 0;
+        width: 100%;
+        margin: 0;
+        box-shadow: none;
+        border-radius: 0;
+        padding: 0;
+        background-color: white;
+    }
+    .bill-actions {
+        display: none; /* Hide buttons when printing */
+    }
+    .bill-content {
+        border: none;
+        box-shadow: none;
+    }
+}
