@@ -12,18 +12,13 @@ const OrderStatus = () => {
     const [deliveryStatusMessage, setDeliveryStatusMessage] = useState('Checking delivery status...');
     const pollingIntervalRef = useRef(null);
     const deliveryTimerRef = useRef(0);
-
-    // Using a ref to hold the current order state for use inside setInterval
-    // This prevents `order` from being a dependency of useEffect, avoiding the loop
     const currentOrderRef = useRef(order);
     useEffect(() => {
         currentOrderRef.current = order;
-    }, [order]); // Update ref whenever order state changes
+    }, [order]); 
 
     useEffect(() => {
         let orderToLoad = null;
-
-        // Determine which order details to use (newly placed or loaded from localStorage)
         if (newOrderDetails) {
             orderToLoad = newOrderDetails;
             toast.success(`Order ${newOrderDetails.id} Placed Successfully!`, { autoClose: 5000 });
@@ -45,8 +40,6 @@ const OrderStatus = () => {
                 return;
             }
         }
-
-        // Initialize order state and delivery message
         if (orderToLoad) {
             if (!orderToLoad.currentOrderStatus || orderToLoad.currentOrderStatus === 'Unknown' || orderToLoad.currentOrderStatus === 'Pending Payment') {
                 orderToLoad.currentOrderStatus = 'Processing';
@@ -59,19 +52,15 @@ const OrderStatus = () => {
             setDeliveryStatusMessage(orderToLoad.deliveryStatus);
         }
 
-        // Clear any existing interval before setting a new one
         if (pollingIntervalRef.current) {
             clearInterval(pollingIntervalRef.current);
-            pollingIntervalRef.current = null; // Ensure it's nullified
+            pollingIntervalRef.current = null; 
         }
-        deliveryTimerRef.current = 0; // Reset timer for new interval
-
-        // Set up the interval for delivery status updates
+        deliveryTimerRef.current = 0; 
         pollingIntervalRef.current = setInterval(() => {
             setDeliveryStatusMessage(prevStatus => {
-                const currentOrder = currentOrderRef.current; // Get the latest order from ref
+                const currentOrder = currentOrderRef.current; 
                 if (!currentOrder || currentOrder.currentOrderStatus === 'Delivered') {
-                    // If order is null or already delivered, clear interval and keep status
                     if (pollingIntervalRef.current) {
                         clearInterval(pollingIntervalRef.current);
                         pollingIntervalRef.current = null;
@@ -90,7 +79,6 @@ const OrderStatus = () => {
 
                 if (deliveryTimerRef.current >= targetDeliveryTime) {
                     newStatus = 'Delivered successfully.';
-                    // Update order status in React state and localStorage
                     setOrder(prevOrder => {
                         const updatedOrder = { ...prevOrder, currentOrderStatus: 'Delivered', deliveryStatus: newStatus };
                         const currentUser = JSON.parse(localStorage.getItem('currentUser'));
@@ -105,33 +93,32 @@ const OrderStatus = () => {
                         return updatedOrder;
                     });
                     if (pollingIntervalRef.current) {
-                        clearInterval(pollingIntervalRef.current); // Stop polling once delivered
+                        clearInterval(pollingIntervalRef.current); 
                         pollingIntervalRef.current = null;
                     }
                 } else {
-                    // Gradual status updates
                     if (prevStatus.includes('packed') || prevStatus.includes('dispatch.') || prevStatus === 'Checking delivery status...') {
                         newStatus = 'Item dispatched from warehouse.';
                     } else if (prevStatus.includes('dispatched')) {
                         newStatus = 'Out for delivery.';
                     }
-                    // For COD specific faster transition:
+                    
                     if (currentOrder.paymentMethod === 'cod' && deliveryTimerRef.current >= (COD_DELIVERY_TIME / 2) && newStatus === 'Item dispatched from warehouse.') {
                          newStatus = 'Out for delivery.';
                     }
                 }
                 return newStatus;
             });
-        }, 5000); // Poll every 5 seconds
+        }, 5000); 
 
-        // Cleanup function: Clear interval when component unmounts or dependencies change
+       
         return () => {
             if (pollingIntervalRef.current) {
                 clearInterval(pollingIntervalRef.current);
                 pollingIntervalRef.current = null;
             }
         };
-    }, [newOrderDetails, navigate]); // Removed 'order' from dependencies. currentOrderRef handles latest state.
+    }, [newOrderDetails, navigate]); 
 
     const handleViewFinalDelivery = () => {
         if (order) {

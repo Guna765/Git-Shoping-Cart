@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { FaEdit, FaTrash, FaShoppingCart, FaCreditCard } from 'react-icons/fa'; // Import new icons
+import { FaEdit, FaTrash, FaShoppingCart, FaCreditCard } from 'react-icons/fa'; 
 import { toast } from 'react-toastify';
 import './ViewItems.css';
 

@@ -1,43 +1,38 @@
-// src/components/EditItemForm.js
-
 import React, { useState, useEffect } from 'react';
 import { toast } from 'react-toastify';
-import './AddItemForm.css'; // Re-using AddItemForm's CSS for consistency
+import './AddItemForm.css'; 
 
 function EditItemForm({ itemToEdit, onUpdateItem, onCancelEdit }) {
-    const [id, setId] = useState(''); // Store original ID
+    const [id, setId] = useState(''); 
     const [category, setCategory] = useState('');
     const [publication, setPublication] = useState('');
-    const [imageFile, setImageFile] = useState(null); // Stores the new File object if changed
-    const [imagePreviewUrl, setImagePreviewUrl] = useState(''); // Stores URL for preview
+    const [imageFile, setImageFile] = useState(null); 
+    const [imagePreviewUrl, setImagePreviewUrl] = useState(''); 
     const [price, setPrice] = useState('');
     const [sellerName, setSellerName] = useState('');
-    const [itemAvailable, setItemAvailable] = useState('yes'); // Default to 'yes' for radio buttons
+    const [itemAvailable, setItemAvailable] = useState('yes'); 
 
     const productCategories = [
         "Electronics", "Books", "Clothing", "Home Appliances", "Sports Equipment",
         "Toys & Games", "Groceries", "Automotive", "Health & Beauty", "Furniture"
     ];
 
-    // Populate form fields when itemToEdit changes
     useEffect(() => {
         if (itemToEdit) {
             setId(itemToEdit.id);
             setCategory(itemToEdit.category);
             setPublication(itemToEdit.publication);
-            // If there's an existing image, set it as preview
             setImagePreviewUrl(itemToEdit.image && itemToEdit.image !== 'placeholder-image.jpg' ? itemToEdit.image : '');
-            setImageFile(null); // Clear any old file selection
-            setPrice(itemToEdit.price.toString()); // Convert number to string for input
+            setImageFile(null); 
+            setPrice(itemToEdit.price.toString()); 
             setSellerName(itemToEdit.sellerName);
             setItemAvailable(itemToEdit.itemAvailable ? 'yes' : 'no');
         }
-    }, [itemToEdit]); // Re-run effect if itemToEdit changes
+    }, [itemToEdit]); 
 
     const handleSubmit = (event) => {
         event.preventDefault();
 
-        // Basic validation
         if (!category || !publication || !price || !sellerName) {
             toast.error("Please fill in all required fields.");
             return;
@@ -48,10 +43,9 @@ function EditItemForm({ itemToEdit, onUpdateItem, onCancelEdit }) {
         }
 
         const updatedItem = {
-            id: id, // Keep the original ID
+            id: id, 
             category,
             publication,
-            // If a new image file was selected, use its preview URL. Otherwise, keep the old one.
             image: imageFile ? imagePreviewUrl : (itemToEdit.image || 'placeholder-image.jpg'),
             price: parseFloat(price),
             sellerName,
@@ -67,22 +61,21 @@ function EditItemForm({ itemToEdit, onUpdateItem, onCancelEdit }) {
     const handleImageChange = (event) => {
         if (event.target.files && event.target.files[0]) {
             const file = event.target.files[0];
-            setImageFile(file); // Set the new file
+            setImageFile(file); 
 
             const reader = new FileReader();
             reader.onloadend = () => {
-                setImagePreviewUrl(reader.result); // Set preview for the new file
+                setImagePreviewUrl(reader.result); 
             };
             reader.readAsDataURL(file);
         } else {
             setImageFile(null);
-            // If cleared, revert to old image if available, otherwise clear preview
             setImagePreviewUrl(itemToEdit.image && itemToEdit.image !== 'placeholder-image.jpg' ? itemToEdit.image : '');
         }
     };
 
     return (
-        <div className="add-item-form-container"> {/* Re-using CSS class name */}
+        <div className="add-item-form-container"> 
             <h3>Edit Item</h3>
             <form onSubmit={handleSubmit}>
                 <div className="form-group">
@@ -184,7 +177,7 @@ function EditItemForm({ itemToEdit, onUpdateItem, onCancelEdit }) {
                     </div>
                 </div>
 
-                <div className="form-actions"> {/* New container for buttons */}
+                <div className="form-actions"> 
                     <button type="submit" className="submit-button">Update Item</button>
                     <button type="button" onClick={onCancelEdit} className="cancel-button">Cancel</button>
                 </div>

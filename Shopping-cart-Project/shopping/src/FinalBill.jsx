@@ -62,7 +62,6 @@ const FinalBill = () => {
                     <p><strong>Delivery Date:</strong> {new Date().toLocaleDateString('en-IN', {
                         year: 'numeric', month: '2-digit', day: '2-digit'
                     })}</p>
-                    {/* You might want to store actual delivery completion date in orderDetails */}
                 </div>
 
                 <div className="bill-section total-summary">
@@ -73,7 +72,6 @@ const FinalBill = () => {
                 </div>
 
                 <div className="bill-barcode">
-                    {/* Use order.id or trackingId for barcode data */}
                     {orderDetails.trackingId ? (
                         <Barcode value={orderDetails.trackingId} displayValue={true} />
                     ) : (

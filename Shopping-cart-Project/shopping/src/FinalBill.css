@@ -107,9 +107,8 @@
     text-align: center;
 }
 
-/* react-barcode specific styling adjustments */
 .bill-barcode svg {
-    max-width: 100%; /* Ensure barcode fits within its container */
+    max-width: 100%; 
     height: auto;
 }
 
@@ -158,7 +157,7 @@
     transform: translateY(-2px);
 }
 
-/* Print specific styles (Optional: for better print layout) */
+
 @media print {
     body * {
         visibility: hidden;
@@ -178,7 +177,7 @@
         background-color: white;
     }
     .bill-actions {
-        display: none; /* Hide buttons when printing */
+        display: none; 
     }
     .bill-content {
         border: none;

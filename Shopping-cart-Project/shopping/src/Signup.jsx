@@ -1,16 +1,14 @@
 import React, { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
-import { ToastContainer, toast } from 'react-toastify'; // Import ToastContainer and toast
-import 'react-toastify/dist/ReactToastify.css'; // Import toastify CSS
-import './Signup.css'; // Your custom CSS file
-
-// Import Font Awesome components and icons
+import { ToastContainer, toast } from 'react-toastify'; 
+import 'react-toastify/dist/ReactToastify.css'; 
+import './Signup.css'; 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import {
-  faEnvelope,    // For Email
-  faPhone,        // For Phone
-  faUser,         // For Username/User ID
-  faLock          // For Password and Confirm Password
+  faEnvelope,    
+  faPhone,       
+  faUser,        
+  faLock         
 } from '@fortawesome/free-solid-svg-icons';
 
 function Signup() {
@@ -22,54 +20,45 @@ function Signup() {
     const navigate = useNavigate();
 
     const handleSubmit = (event) => {
-        event.preventDefault(); // Prevent default form submission behavior
-
-        // Password matching validation
+        event.preventDefault(); 
         if (password !== confirmPassword) {
-            toast.error("Passwords do not match!"); // Display an error toast
-            return; // Stop the function execution
+            toast.error("Passwords do not match!");
+            return; 
         }
 
-        // Retrieve existing users from local storage
         const existingUsers = JSON.parse(localStorage.getItem('users')) || [];
 
-        // Check if user with given email or username already exists
         const userExists = existingUsers.some(
             user => user.email === email || user.username === username
         );
 
         if (userExists) {
-            toast.error("User with this email or username already exists. Please try logging in or use different credentials."); // Display error toast
-            return; // Stop the function execution
+            toast.error("User with this email or username already exists. Please try logging in or use different credentials."); 
+            return; 
         }
 
-        // Create new user object
         const newUser = {
             email,
             phone,
             username,
-            password, // In a real app, hash this password before storing!
+            password, 
         };
 
-        // Add new user to the existing list and save to local storage
         const updatedUsers = [...existingUsers, newUser];
         localStorage.setItem('users', JSON.stringify(updatedUsers));
 
-        // Display success toast
         toast.success("Sign Up Successful! You can now log in.");
 
-        // Navigate to the login page after a short delay to allow the user to see the toast message
         setTimeout(() => {
             navigate('/login');
-        }, 2000); // 2-second delay
+        }, 2000);
     };
 
     return (
         <div className="signup-container">
-            {/* ToastContainer is where all toast notifications will be rendered */}
             <ToastContainer
-                position="top-right" // Position of the toasts
-                autoClose={5000}     // Toasts disappear after 5 seconds
+                position="top-right" 
+                autoClose={5000}    
                 hideProgressBar={false}
                 newestOnTop={false}
                 closeOnClick
@@ -81,7 +70,6 @@ function Signup() {
 
             <h2>Sign Up</h2>
             <form onSubmit={handleSubmit}>
-                {/* Email Input Field with Icon */}
                 <div className="form-group">
                     <label htmlFor="email">Email</label>
                     <div className="input-with-icon">
@@ -98,13 +86,12 @@ function Signup() {
                     </div>
                 </div>
 
-                {/* Phone Number Input Field with Icon */}
                 <div className="form-group">
                     <label htmlFor="phone">Phone Number</label>
                     <div className="input-with-icon">
                         <FontAwesomeIcon icon={faPhone} className="input-icon" />
                         <input
-                            type="tel" // Use type="tel" for phone numbers
+                            type="tel"
                             id="phone"
                             name="phone"
                             placeholder="Enter your phone number"
@@ -115,7 +102,6 @@ function Signup() {
                     </div>
                 </div>
 
-                {/* Username Input Field with Icon */}
                 <div className="form-group">
                     <label htmlFor="username">Username</label>
                     <div className="input-with-icon">
@@ -132,7 +118,6 @@ function Signup() {
                     </div>
                 </div>
 
-                {/* Password Input Field with Icon */}
                 <div className="form-group">
                     <label htmlFor="password">Password</label>
                     <div className="input-with-icon">
@@ -149,7 +134,6 @@ function Signup() {
                     </div>
                 </div>
 
-                {/* Confirm Password Input Field with Icon */}
                 <div className="form-group">
                     <label htmlFor="confirm-password">Confirm Password</label>
                     <div className="input-with-icon">
@@ -166,11 +150,9 @@ function Signup() {
                     </div>
                 </div>
 
-                {/* Sign Up Button */}
                 <button type="submit" className="signup-button">Sign Up</button>
             </form>
 
-            {/* Link to Login Page */}
             <div className="login-link">
                 Already have an account? <Link to="/login">Login here</Link>
             </div>

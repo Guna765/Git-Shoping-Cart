@@ -39,7 +39,7 @@ const DeliveryStatus = () => {
                     if (!order) return order;
 
                     let updatedOrder = { ...order };
-                    // Simulate status changes for delivery
+
                     if (updatedOrder.currentOrderStatus === 'Processing' && Math.random() > 0.7) {
                         updatedOrder.currentOrderStatus = 'Shipped';
                         updatedOrder.deliveryStatus = 'Your item has been shipped!';
@@ -60,7 +60,7 @@ const DeliveryStatus = () => {
                 }
                 return updatedOrders;
             });
-        }, 5000); // Update every 5 seconds for simulation
+        }, 5000); 
 
         return () => clearInterval(interval);
     }, [loadUserOrders, navigate]);
@@ -69,7 +69,6 @@ const DeliveryStatus = () => {
         <div className="delivery-status-container">
             <h2>Your Delivery Status</h2>
             {currentUser && userOrders.length > 0 ? (
-                // Changed to delivery-items-grid for multi-column layout
                 <div className="delivery-items-row">
                     {userOrders.map(order => (
                         order ? (
@@ -83,7 +82,7 @@ const DeliveryStatus = () => {
                                     <img src={order.item.image} alt={order.item.publication} className="delivery-item-image" />
                                 )}
                                 {order.currentOrderStatus === 'Delivered' && (
-                                    // Navigate to FinalBill component, passing order details
+                                    
                                     <button
                                         onClick={() => navigate('/final-bill', { state: { orderDetails: order } })}
                                     >

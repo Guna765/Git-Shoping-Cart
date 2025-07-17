@@ -1,6 +1,6 @@
 .delivery-status-container {
     padding: 20px;
-    max-width: 1200px; /* Increased max-width to accommodate grid */
+    max-width: 1200px; 
     margin: 20px auto;
     background-color: #f9f9f9;
     border-radius: 8px;
@@ -19,17 +19,15 @@
     
 }
 
-/* New CSS for Grid Layout (Multi-column) */
 .delivery-items-row {
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); /* Adjust minmax as needed */
-    gap: 25px; /* Spacing between cards */
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); 
+    gap: 25px; 
     padding: 20px 0;
-   /* Center items if they don't fill the row */
+ 
     
    
 }
-
 
 .delivery-card {
     background-color: #fff;
@@ -39,9 +37,9 @@
     text-align: left;
     box-shadow: 0 1px 3px rgba(0, 0, 0, 0.08);
     transition: transform 0.2s ease-in-out;
-    display: flex; /* Make card content a flex container */
-    flex-direction: column; /* Stack content vertically inside card */
-    align-items: flex-start; /* Align text to start */
+    display: flex;
+    flex-direction: column; 
+    align-items: flex-start; 
 }
 
 .delivery-card:hover {
@@ -54,7 +52,7 @@
     font-size: 1.3em;
     border-bottom: 1px dashed #eee;
     padding-bottom: 8px;
-    width: 100%; /* Ensure heading takes full width */
+    width: 100%;
 }
 
 .delivery-card p {
@@ -72,12 +70,11 @@
     max-width: 120px;
     height: auto;
     border-radius: 4px;
-    margin: 15px auto 0 auto; /* Center image horizontally within the card */
+    margin: 15px auto 0 auto; 
     border: 1px solid #eee;
     display: block;
 }
 
-/* Status specific styling */
 .status-processing {
     color: orange;
     font-weight: bold;
@@ -98,7 +95,7 @@
     font-weight: bold;
 }
 
-/* Buttons */
+
 .delivery-card button {
     background-color: #0e79b8;
     color: white;
@@ -109,7 +106,7 @@
     font-size: 0.95em;
     margin-top: 15px;
     transition: background-color 0.3s ease;
-    align-self: center; /* Center button within the flex column card */
+    align-self: center; 
 }
 
 .delivery-card button:hover {
@@ -132,7 +129,6 @@
     background-color: #0056b3;
 }
 
-/* Message when no deliveries are found */
 .no-deliveries-message {
     color: #666;
     font-size: 1.1em;

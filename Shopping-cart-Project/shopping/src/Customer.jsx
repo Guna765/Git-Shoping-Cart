@@ -7,15 +7,14 @@ const Customer = () => {
     const [customerItems, setCustomerItems] = useState([]);
     const [currentUser, setCurrentUser] = useState(null);
     const [isProfileDropdownOpen, setIsProfileDropdownOpen] = useState(false);
-    const [selectedItem, setSelectedItem] = useState(null); // State for item description modal
+    const [selectedItem, setSelectedItem] = useState(null); 
     const navigate = useNavigate();
     const profileRef = useRef(null);
 
-    // --- Data Loading Functions ---
+    
     const loadCustomerItems = () => {
-        // In a real app, this would fetch from a database/API
+        
         const storedItems = JSON.parse(localStorage.getItem('items')) || [];
-        // Simulate some available items for demonstration if localStorage is empty
         const initialItems = storedItems.length > 0 ? storedItems : [
             {
                 id: 'item1',
@@ -127,7 +126,7 @@ const Customer = () => {
                 image: 'https://rukminim2.flixcart.com/image/612/612/xif0q/game/h/2/g/ring-toss-game-set-for-kids-plastic-outdoor-indoor-games-with-original-imaghh8y6yh346zg.jpeg?q=70',
                 description: 'Classic ring toss game for outdoor and indoor fun.'
             },
-            // Added item from your screenshot for demonstration
+          
             {
                 id: 'item12',
                 category: 'Electronics',
@@ -160,19 +159,18 @@ const Customer = () => {
         setCurrentUser(user);
     };
 
-    // --- Effects ---
+   
     useEffect(() => {
         loadCustomerItems();
         loadCurrentUser();
 
-        // Event listener for changes in localStorage (e.g., admin updates items)
+       
         const handleStorageChange = () => {
             loadCustomerItems();
             loadCurrentUser();
         };
         window.addEventListener('storage', handleStorageChange);
 
-        // Click outside handler for profile dropdown and item description modal
         const handleClickOutside = (event) => {
             if (profileRef.current && !profileRef.current.contains(event.target)) {
                 setIsProfileDropdownOpen(false);
@@ -183,14 +181,12 @@ const Customer = () => {
         };
         document.addEventListener('mousedown', handleClickOutside);
 
-        // Cleanup function for event listeners
         return () => {
             window.removeEventListener('storage', handleStorageChange);
             document.removeEventListener('mousedown', handleClickOutside);
         };
     }, [selectedItem]);
 
-    // --- Event Handlers ---
     const handleAddToCartCustomer = (item) => {
         if (!currentUser) {
             toast.error("Please log in to add items to your cart.");
@@ -358,7 +354,6 @@ const Customer = () => {
                 )}
             </div>
 
-            {/* Item Description Overlay/Modal */}
             {selectedItem && (
                 <div className="item-description-overlay" onClick={handleCloseDescription}>
                     <div className="item-description-content" onClick={e => e.stopPropagation()}>

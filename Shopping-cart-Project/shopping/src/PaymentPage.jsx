@@ -1,14 +1,13 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate, useLocation } from 'react-router-dom';
 import { toast } from 'react-toastify';
-import './PaymentPage.css'; // Make sure this CSS file is linked
-
+import './PaymentPage.css'; 
 const PaymentPage = () => {
     const navigate = useNavigate();
     const location = useLocation();
     const { itemToBuy } = location.state || {};
 
-    const [paymentMethod, setPaymentMethod] = useState(''); // State for selected payment method ('upi' or 'cod')
+    const [paymentMethod, setPaymentMethod] = useState(''); 
     const [upiId, setUpiId] = useState('');
     const [isUpiVerified, setIsUpiVerified] = useState(false);
     const [paymentProcessing, setPaymentProcessing] = useState(false);
@@ -22,7 +21,7 @@ const PaymentPage = () => {
 
     const handlePaymentMethodChange = (e) => {
         setPaymentMethod(e.target.value);
-        // Reset UPI state if COD is selected
+       
         if (e.target.value === 'cod') {
             setUpiId('');
             setIsUpiVerified(false);
@@ -58,10 +57,10 @@ const PaymentPage = () => {
         }
 
         if (paymentProcessing) {
-            return; // Prevent double submission if already processing
+            return; 
         }
 
-        setPaymentProcessing(true); // Set processing state to true
+        setPaymentProcessing(true); 
 
         if (method === 'upi') {
             if (!isUpiVerified) {
@@ -71,26 +70,23 @@ const PaymentPage = () => {
             }
             toast.info('Processing your UPI payment...', { autoClose: false, toastId: 'processingToast' });
             setTimeout(() => {
-                toast.dismiss('processingToast'); // Dismiss the processing toast
+                toast.dismiss('processingToast');
 
-                // Directly navigate to AddressForm
                 navigate('/address', { state: { itemToBuy: itemToBuy, paymentMethod: 'upi' } });
 
-                // Show success toast after a short delay or directly
-                // Using a small delay here to ensure navigation starts first
                 setTimeout(() => {
-                    toast.success("Payment Successful!"); // Show success message
-                }, 100); // Short delay to allow navigation to begin
+                    toast.success("Payment Successful!"); 
+                }, 100); 
 
-                setPaymentProcessing(false); // Reset processing state
-            }, 3000); // Simulate UPI payment delay
+                setPaymentProcessing(false); 
+            }, 3000); 
         } else if (method === 'cod') {
             toast.info('Proceeding with Cash on Delivery. Enter address details.');
             setTimeout(() => {
-                // Directly navigate to AddressForm for COD without "payment processing" phase
+               
                 navigate('/address', { state: { itemToBuy: itemToBuy, paymentMethod: 'cod' } });
-                setPaymentProcessing(false); // Reset processing state
-            }, 1000); // Small delay for UX
+                setPaymentProcessing(false); 
+            }, 1000); 
         } else {
             toast.error('Please select a payment method.');
             setPaymentProcessing(false);
@@ -181,7 +177,6 @@ const PaymentPage = () => {
                         (paymentMethod === 'upi' && !isUpiVerified)
                     }
                 >
-                    {/* Button text changes based on method and processing state */}
                     {paymentProcessing
                         ? 'Processing...'
                         : paymentMethod === 'cod'
